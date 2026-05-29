@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flappy Bird</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game" tabindex="0" aria-label="Flappy game area">
+    <div id="hud">
+      <div>Score: <b id="score">0</b></div>
+      <button id="restart" type="button">Restart</button>
+    </div>
+
+    <!-- One moving pipe with two pieces -->
+    <div id="pipe">
+      <div id="pipeTop"></div>
+      <div id="pipeBottom"></div>
+    </div>
+
+    <div id="character" aria-label="Bird"></div>
+
+    <div id="overlay" hidden>
+      <div class="card">
+        <h2>Game Over</h2>
+        <p>Score: <b id="finalScore">0</b></p>
+        <button id="playAgain" type="button">Play again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

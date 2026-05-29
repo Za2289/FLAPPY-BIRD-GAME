@@ -1,0 +1,76 @@
+:root{
+    --w: 420px;          /* game width  */
+    --h: 620px;          /* game height */
+    --gap: 170px;        /* gap size    (bigger = easier) */
+    --speed: 2000ms;     /* pipe speed  (bigger = slower) */
+  }
+  
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    display:grid;place-items:center;
+    background:linear-gradient(#0a2540,#123b66);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  }
+  
+  #game{
+    position:relative; width:var(--w); height:var(--h);
+    background:linear-gradient(#88d7ff,#e6f7ff);
+    border:3px solid #0f172a; border-radius:18px; overflow:hidden; outline:none;
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+  }
+  
+  /* HUD */
+  #hud{
+    position:absolute; left:12px; right:12px; top:10px; z-index:6;
+    display:flex; align-items:center; justify-content:space-between;
+    color:#0f172a; font-weight:800; text-shadow:0 1px 0 rgba(255,255,255,.6);
+  }
+  #hud button{
+    padding:6px 12px; border-radius:10px; border:2px solid #0f172a;
+    background:#fff; cursor:pointer; font-weight:700;
+  }
+  
+  /* Pipe container moves from right(100%) to -72px.
+     Using % here avoids the Safari var(--w) keyframes bug. */
+  #pipe{
+    position:absolute; top:0; left:100%; width:68px; height:100%; z-index:3;
+    animation: slide var(--speed) linear infinite;
+  }
+  @keyframes slide{ from{ left:100%; } to{ left:-72px; } }
+  
+  /* Two real pieces sized in JS */
+  #pipeTop, #pipeBottom{
+    position:absolute; left:0; width:100%;
+    background:#0f172a; box-shadow:inset 0 0 0 6px #111;
+  }
+  #pipeTop{ top:0;    border-bottom-left-radius:10px; border-bottom-right-radius:10px; }
+  #pipeBottom{ bottom:0; border-top-left-radius:10px;    border-top-right-radius:10px; }
+  
+  /* Bird */
+  #character{
+    position:absolute; width:26px; height:26px; left:36px; top:160px; z-index:5;
+    background:#ffb703; border:3px solid #0f172a; border-radius:50%;
+    box-shadow:0 2px 0 #0f172a;
+  }
+  #character::before{ content:""; position:absolute; right:6px; top:6px; width:6px; height:6px; background:#0f172a; border-radius:50% }
+  #character::after { content:""; position:absolute; right:-6px; top:10px; border-left:8px solid #fb8500; border-top:5px solid transparent; border-bottom:5px solid transparent }
+  
+  /* Overlay */
+  #overlay{ position:absolute; inset:0; background:rgba(0,0,0,.45); display:grid; place-items:center; z-index:10 }
+  #overlay[hidden]{ display:none }
+  .card{
+    width:min(92%, 320px); padding:18px; border-radius:14px; background:#fff; color:#0f172a;
+    text-align:center; box-shadow:0 10px 24px rgba(0,0,0,.25);
+  }
+  .card h2{ margin-bottom:6px }
+  .card button{
+    margin-top:10px; padding:8px 12px; border-radius:10px; border:2px solid #0f172a;
+    background:#f1f5f9; cursor:pointer; font-weight:800;
+  }
+  
+  /* Mobile */
+  @media (max-width: 500px){
+    :root{ --w: 360px; --h: 560px; --gap: 160px }
+  }
+  
